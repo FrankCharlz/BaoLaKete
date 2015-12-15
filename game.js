@@ -18,8 +18,14 @@ var Game = function () {
     var MACHINE_TURN = 1;
 
     this.turn = USER_TURN;
+
     this.switch_turn = function () {
         this.turn = (this.turn + 1) % 2;
+        if (this.turn == USER_TURN) {
+            alert('User play');
+        } else {
+            this.machinePlay();
+        }
     };
 
     this.machine_shimos = [];
@@ -36,22 +42,6 @@ var Game = function () {
     }
 
     var  context = this; //ugly
-
-    var MachineState = function() {
-        this.front = 0;
-        this.back = 0;
-        this.total;
-
-        this.refresh = function (){
-            for (x in context.machine_shimos) {
-                if (context.machine_shimos[x].isFrontLiner) {
-                    this.front += context.machine_shimos[x].value;
-                } else {
-                    this.back += context.machine_shimos[x].value;
-                }
-            }
-        }
-    };
 
 
     function getCurrentShimo(pos, turn) {
@@ -105,6 +95,14 @@ var Game = function () {
     }
 
 
+    this.machinePlay = function () {
+        var rn = parseInt(Math.random()*666)%8;
+        console.log('machine playing start at :', rn);
+        var startAt = this.machine_shimos[rn];
+        if (startAt.value > 1)
+            this.play(startAt);
+        else this.machinePlay();
+    };
 
     function doneFilling(pos) {
         pos = pos % 8;
@@ -114,6 +112,7 @@ var Game = function () {
         if (current_shimo.value === 1) {
             //kufa hapa
             console.log('Umekufa baba');
+            this.switch_turn();
         }
         else  {
             //continue playing
@@ -235,7 +234,7 @@ Shimo = function (id, gameInstance) {
         }
     };
 
-    this.span.addEventListener('click', this.clicked);
+    if (!this.belongsToMachine) this.span.addEventListener('click', this.clicked);
 
 };
 
