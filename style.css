@@ -1,0 +1,44 @@
+html, body, hr, span {margin: 0; padding: 0;}
+
+.container {
+    text-align: center;
+    margin: 32px auto;
+}
+
+#bao{
+    margin: 20px auto;
+    border: 1px solid #d9f5d0;
+    width: 600px;
+    display: block;
+}
+
+.separator {
+    margin: 2px 2px;
+    padding: 4px;
+    background: rgba(196, 207, 243, 0.18);
+    clear: both;
+}
+
+.separator::after {content: "";}
+
+#bao span {
+    width: 144px;
+    height: 124px;
+    line-height: 6;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid #c4cff3;
+    margin: 1px;
+    text-align: center;
+    font-family: 'segoe ui';
+    font-size: large;;
+    font-weight: lighter;
+    overflow-x: hidden;
+}
+
+.stats p {
+    display: inline-block;
+    padding: 12px;
+    margin:  4px;
+    background: rgba(243, 73, 39, 0.07);
+}
